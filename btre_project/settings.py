@@ -129,3 +129,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'btre_project/static'
 ]
+
+#Media folder settings
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
