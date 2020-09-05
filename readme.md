@@ -2,7 +2,7 @@
  
  BTRE is the web site of a (not so) real estate agency, made with  Django python framework and PostgreSQL
  
-This site is based on Brad Traversy's udemy's course. [Link](https://www.udemy.com/course/python-django-dev-to-deployment/learn/lecture/12056362#overview)
+This site is based on Brad Traversy's udemy's course. [Link](https://www.udemy.com/course/python-django-dev-to-deployment)
 
 As the project is still in progress, some personal extra features will be added and listed here when ready.
 
