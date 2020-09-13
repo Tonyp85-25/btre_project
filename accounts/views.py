@@ -6,6 +6,9 @@ from django.contrib.auth.models import User
 
 
 def register(request):
+    """
+    allows user to sign up
+    """
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -41,6 +44,9 @@ def register(request):
 
 
 def login(request):
+    """
+    allows user to log in
+    """
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
@@ -58,7 +64,10 @@ def login(request):
 
 
 def logout():
-    return redirect('index')
+    if request.method == 'POST':
+        auth.logout(request)
+        messages.success(request, "You are now logged out")
+        return redirect('index')
 
 
 def dashboard(request):
