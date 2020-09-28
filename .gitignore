@@ -24,7 +24,8 @@ static/
 
 # C extensions
 *.so
-
+# pip-tools compiled files
+requirements.in
 # Distribution / packaging
 .Python
 build/
