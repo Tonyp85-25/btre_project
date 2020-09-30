@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .models import Following
 from django.contrib import messages
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -10,18 +11,18 @@ def follow(request):
     """
     allows user to follow a listing
     """
-    if request.method == 'POST':
+    if request.method == 'POST' and request.is_ajax:
         user_id = request.user.id
         listing_id = request.POST['listing_id']
         listing = request.POST['listing']
         following = Following(user_id=user_id, listing_id=listing_id, listing=listing)
         has_followed = Following.objects.all().filter(listing_id=listing_id, user_id=user_id)
         if has_followed:
-            return redirect('/listings/' + listing_id)
+            return JsonResponse({"message": "You already follow this listing!", "result": "error", "class": "danger"}, status=200)
         else:
             following.save()
 
-        return redirect('/listings/' + listing_id)
+        return JsonResponse({"message": "You now follow this listing!", "result": "success", "class": "success"}, status=200)
 
 
 @login_required
