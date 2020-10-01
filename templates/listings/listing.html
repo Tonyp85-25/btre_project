@@ -161,7 +161,11 @@
             {% endif %}
             <input type="hidden" name="listing_id" value="{{listing.id}}">
             <input type="hidden" name="listing"  value="{{listing.title}}" >
+            {% if is_followed %}
+            <button class="btn-danger btn-block btn-sm" id="follow" data-url="{% url 'unfollow' %}"><i class="fas fa-minus-circle"></i> Remove from favorites </button>
+            {% else %}
            <button class="btn-success btn-block btn-sm" id="follow" data-url="{% url 'follow' %}"><i class="fas fa-plus-circle"></i> Add to favorites </button>
+          {% endif %}
           </form>
         </div>
       </div>

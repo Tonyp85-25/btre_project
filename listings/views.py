@@ -3,6 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 from .models import Listing
 from .choices import bedrooms_choices, states_choices, prices_choices
+from  followings.models  import Following
 
 
 def index(request):
@@ -18,11 +19,19 @@ def index(request):
 
 
 def listing(request, listing_id):
+    user_id = request.user.id
     listing = get_object_or_404(Listing, pk=listing_id)
     l_range = ['1','2','3','4','5','6']
+    following = Following.objects.all().filter(listing_id=listing_id, user_id=user_id)
+    if following:
+        is_followed = True
+    else:
+        is_followed = False
+
     context = {
         'listing': listing,
-        'l_range': l_range
+        'l_range': l_range,
+        'is_followed': is_followed
     }
 
     return render(request, 'listings/listing.html', context)
@@ -33,7 +42,7 @@ def search(request):
 
     # Keywords
     if 'keywords' in request.GET:
-        keywords =request.GET['keywords']
+        keywords = request.GET['keywords']
         if keywords:
             queryset_list = queryset_list.filter(description__icontains=keywords)
 

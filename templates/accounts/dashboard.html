@@ -32,9 +32,23 @@
       <div class="row">
         <div class="col-md-12">
           <h2>Welcome {{user.first_name}}</h2>
+           <p>Here are the property listings that you have inquired about</p>
+          <ul class="nav nav-tabs">
+            {% if contacts %}
+            <li class="nav-item">
+              <a class="nav-link active" href="#contactTable" id="contact-tab">Inquiries</a>
+            </li>
+            {% endif %}
+            {% if followings %}
+            <li class="nav-item">
+              <a class="nav-link" href="#">Followings</a>
+            </li>
+            {% endif %}
+          </ul>
+          <div class="tab-content" id="myTabContent">
           {% if contacts %}
-          <p>Here are the property listings that you have inquired about</p>
-          <table class="table">
+          <div class="tab-pane fade show active" id="contactTable" role="tabpanel" aria-labelledby="contact-tab">
+            <table class="table" >
             <thead>
               <tr>
                 <th scope="col">#</th>
@@ -54,6 +68,8 @@
               {% endfor %}
             </tbody>
           </table>
+          </div>
+
           {% else %}
             <p>You have not made any inquiries</p>
           {% endif %}
