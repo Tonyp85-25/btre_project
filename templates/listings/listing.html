@@ -86,6 +86,7 @@
             </div>
               {% endif %}
         </div>
+
           <!-- Fields -->
           <div class="row mb-5 fields">
             <div class="col-md-6">
@@ -167,7 +168,19 @@
            <button class="btn-success btn-block btn-sm" id="follow" data-url="{% url 'follow' %}"><i class="fas fa-plus-circle"></i> Add to favorites </button>
           {% endif %}
           </form>
+           <!--Stats -->
+<!--           <div class="row">-->
+          {% if listing.followings %}
+              {% if listing.followings == 1 %}
+              <p class="mt-2"> <i class="fas fa-heart"></i> Followed by {{listing.followings}} person </p>
+              {% else %}
+              <p class="mt-2"> <i class="fas fa-heart"></i> Followed by {{listing.followings}} people </p>
+              {% endif %}
+<!--          </div>-->
+          {% endif %}
         </div>
+
+
       </div>
     </div>
   </section>
