@@ -1,16 +1,8 @@
 from django.db import models
 from datetime import datetime
 from realtors.models import Realtor
+from countries.models import Country
 # Create your models here.
-
-
-class Country(models.Model):
-    title = models.CharField(max_length=30)
-    currency = models.CharField(max_length=20)
-    is_active = models.BooleanField(default=True)
-
-    def __str__(self):
-        return self.title
 
 
 class Listing(models.Model):
@@ -37,7 +29,7 @@ class Listing(models.Model):
     is_published = models.BooleanField(default=True)
     list_date = models.DateTimeField(default=datetime.now, blank=True)
     followings = models.IntegerField(default=0)
-    # country = models.ForeignKey(Country, on_delete=models.CASCADE)
+    country = models.ForeignKey(Country, on_delete=models.CASCADE, default=1)
 
     def __str__(self):
         return self.title

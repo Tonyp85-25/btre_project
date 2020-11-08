@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top">
     <div class="container">
@@ -17,7 +18,7 @@
           class="nav-item  mr-3"
           {% endif %}
           >
-            <a class="nav-link" href="{% url 'index' %}">Home</a>
+            <a class="nav-link" href="{% url 'index' %}">{% translate "Home"%}</a>
           </li>
           <li
             {% if 'about' in request.path %}
@@ -26,15 +27,33 @@
                 class="nav-item  mr-3"
             {% endif %}
           >
-            <a class="nav-link" href="{% url 'about' %}">About</a>
+            <a class="nav-link" href="{% url 'about' %}">{% translate "About"%}</a>
           </li>
           <li  {% if 'listings' in request.path %}
                 class="nav-item active mr-3"
             {% else %}
                 class="nav-item  mr-3"
             {% endif %} >
-            <a class="nav-link" href="{% url 'listings' %}">Featured Listings</a>
+            <a class="nav-link" href="{% url 'listings' %}">{% translate "Featured Listings"%}</a>
           </li>
+            <li>
+                 <form action="{% url 'set_language' %}" method="post" id="trans-form">
+                     {% csrf_token %}
+                    <input name="next" type="hidden" value="{{ redirect_to }}">
+                     <div class="form-group">
+                           <select name="language" class="form-control">
+                        {% get_current_language as LANGUAGE_CODE %}
+                        {% get_available_languages as LANGUAGES %}
+                        {% get_language_info_list for LANGUAGES as languages %}
+                        {% for language in languages %}
+                        <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %} selected{% endif %}>
+                            {{ language.name_local }} ({{ language.code }})
+                        </option>
+                        {% endfor %}
+                    </select>
+                     </div>
+                </form>
+            </li>
         </ul>
 
         <ul class="navbar-nav ml-auto">
@@ -45,11 +64,11 @@
                 class="nav-item  mr-3"
             {% endif %} >
             <a class="nav-link" href="{% url 'dashboard' %}">
-              <i class="fas fa-user-plus"></i> Dashboard</a>
+              <i class="fas fa-user-plus"></i> {% translate "Dashboard"%}</a>
           </li>
           <li class="nav-item mr-3">
              <a class="nav-link" href="javascript:{document.getElementById('logout').submit()}">
-              <i class="fas fa-sign-out-alt"></i> Logout</a>
+              <i class="fas fa-sign-out-alt"></i> {% translate "Logout"%}</a>
             <form action="{% url 'logout'%}" method="POST" id="logout">
               {% csrf_token %}
               <input type="hidden">
@@ -62,7 +81,7 @@
                 class="nav-item  mr-3"
             {% endif %} >
             <a class="nav-link" href="{% url 'register' %}">
-              <i class="fas fa-user-plus"></i> Register</a>
+              <i class="fas fa-user-plus"></i> {% translate "Register"%}</a>
           </li>
           <li {% if 'login' in request.path %}
                 class="nav-item active mr-3"
@@ -71,7 +90,7 @@
             {% endif %} >
             <a class="nav-link" href="{% url 'login' %}">
               <i class="fas fa-sign-in-alt"></i>
-              Login</a>
+              {% translate "Login"%}</a>
           </li>
           {% endif %}
         </ul>

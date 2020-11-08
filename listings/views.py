@@ -3,7 +3,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 # Create your views here.
 from .models import Listing
 from .choices import bedrooms_choices, states_choices, prices_choices
-from  followings.models  import Following
+from followings.models import Following
 
 
 def index(request):

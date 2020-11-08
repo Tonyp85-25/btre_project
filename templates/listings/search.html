@@ -1,5 +1,5 @@
 {% extends 'base.html'%}
-
+{% load i18n %}
 {% load humanize %}
 {% block content %}
 <section id="showcase-inner" class="showcase-search text-white py-5">
@@ -10,19 +10,19 @@
             <!-- Form Row 1 -->
             <div class="form-row">
               <div class="col-md-4 mb-3">
-                <label class="sr-only">Keywords</label>
+                <label class="sr-only">{% translate "Keywords"%}</label>
                 <input type="text" name="keywords" class="form-control" placeholder="Keyword (Pool, Garage, etc)" value="{{values.keywords}}">
               </div>
 
               <div class="col-md-4 mb-3">
-                <label class="sr-only">City</label>
+                <label class="sr-only">{% translate "City"%}</label>
                 <input type="text" name="city" class="form-control" placeholder="City" value="{{values.city}}">
               </div>
 
               <div class="col-md-4 mb-3">
-                <label class="sr-only">State</label>
+                <label class="sr-only">{% translate "State"%}</label>
                 <select name="state" class="form-control">
-                  <option selected="true" disabled="disabled">State (All)</option>
+                  <option selected="true" disabled="disabled">{% translate "State (All)"%}</option>
                    {% for k,v in states_choices.items%}
                     <option value="{{k}}"
                             {% if k == values.state %}
@@ -36,9 +36,9 @@
             <!-- Form Row 2 -->
             <div class="form-row">
               <div class="col-md-6 mb-3">
-                <label class="sr-only">Bedrooms</label>
+                <label class="sr-only">{% translate "Bedrooms"%}</label>
                 <select name="bedrooms" class="form-control">
-                  <option selected="true" disabled="disabled">Bedrooms (Any)</option>
+                  <option selected="true" disabled="disabled">{% translate "Bedrooms (Any)"%}</option>
                    {% for l in bedrooms_choices %}
                     <option value="{{l}}"
                             {% if l == values.bedrooms %}
@@ -50,7 +50,7 @@
               </div>
               <div class="col-md-6 mb-3">
                 <select name="price" class="form-control">
-                  <option selected="true" disabled="disabled">Max Price (All)</option>
+                  <option selected="true" disabled="disabled">{% translate "Max Price (All)"%}</option>
                   {% for k,v in prices_choices.items%}
                     <option value="{{k}}"
                     {% if k == values.price %}
@@ -61,7 +61,7 @@
                 </select>
               </div>
             </div>
-            <button class="btn btn-secondary btn-block mt-4" type="submit">Submit form</button>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">{% translate "Submit form"%}</button>
           </form>
         </div>
       </div>
@@ -74,12 +74,12 @@
         <ol class="breadcrumb">
           <li class="breadcrumb-item">
             <a href="{% url 'index'%}">
-              <i class="fas fa-home"></i> Home</a>
+              <i class="fas fa-home"></i> {% translate "Home"%}</a>
           </li>
           <li class="breadcrumb-item">
-            <a href="{% url 'listings'%}">Browse Listings</a>
+            <a href="{% url 'listings'%}">{% translate "Browse Listings"%}</a>
           </li>
-          <li class="breadcrumb-item"> Search Results</li>
+          <li class="breadcrumb-item"> {% translate "Search Results"%}</li>
         </ol>
       </nav>
     </div>
@@ -108,15 +108,15 @@
                   <hr>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-th-large"></i> Sqft: {{listing.sqft}}</div>
+                      <i class="fas fa-th-large"></i>{%blocktranslate%} Sqft: {{listing.sqft}}{%endblocktranslate%} </div>
                     <div class="col-6">
-                      <i class="fas fa-car"></i> Garage: {{listing.garage}}</div>
+                      <i class="fas fa-car"></i> {%blocktranslate%} Garage: {{listing.garage}}{%endblocktranslate%}</div>
                   </div>
                   <div class="row py-2 text-secondary">
                     <div class="col-6">
-                      <i class="fas fa-bed"></i> Bedrooms: {{listing.bedrooms}}</div>
+                      <i class="fas fa-bed"></i>{%blocktranslate%}  Bedrooms: {{listing.bedrooms}}{%endblocktranslate%}</div>
                     <div class="col-6">
-                      <i class="fas fa-bath"></i> Bathrooms: {{listing.bathrooms}}</div>
+                      <i class="fas fa-bath"></i> {%blocktranslate%} Bathrooms: {{listing.bathrooms}}{%endblocktranslate%}</div>
                   </div>
                   <hr>
                   <div class="row py-2 text-secondary">
@@ -128,14 +128,14 @@
                       <i class="fas fa-clock"></i> {{listing.list_date | timesince}} </div>
                   </div>
                   <hr>
-                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">More Info</a>
+                  <a href="{% url 'listing' listing.id %}" class="btn btn-primary btn-block">{% translate "More Info"%}</a>
                 </div>
               </div>
             </div>
             {% endfor %}
         {% else %}
         <div class="col-md-12">
-          <p> No listings avalaible</p>
+          <p> {% translate "No listings avalaible"%}</p>
         </div>
         {% endif %}
         <!-- Listing 1 -->

@@ -24,6 +24,7 @@ photo_3: STR
 photo_4: STR
 photo_5: STR
 photo_6: STR
+country: INT (FOREIGN KEY [country])
 
 ### REALTOR
 id: INT
@@ -34,6 +35,7 @@ email: STR
 phone: STR
 is_mvp: BOOL [0]
 hire_date: DATE
+country: INT (FOREIGN KEY [country])
 
 ### CONTACT
 id: INT
